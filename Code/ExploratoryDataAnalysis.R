@@ -90,15 +90,17 @@ ggsave(
 )
 
 enigh16 %>% transmute(
-    HHI       = r_ingc_pc,
-    `log HHI` = y,
-    `PL Urban` = lpob_16_u, 
-    `PL Rural` = lpob_16_r,
-    Survey = "ENIGH 2016"
+  HHI        = ingc_pc, 
+  `HHI*`     = r_ingc_pc,
+  `log HHI`  = y,
+  `PL Urban` = lpob_16_u, 
+  `PL Rural` = lpob_16_r,
+  Survey     = "ENIGH 2016"
 ) %>%
     rbind(., 
         enigh18 %>% transmute(
-            HHI        = r_ingc_pc,
+            HHI        = ingc_pc, 
+            `HHI*`     = r_ingc_pc,
             `log HHI`  = y,
             `PL Urban` = lpob_18_u, 
             `PL Rural` = lpob_18_r,
@@ -107,6 +109,7 @@ enigh16 %>% transmute(
     rbind(., 
         emovi17 %>% transmute(
             HHI        = NA,
+            `HHI*`     = NA,
             `log HHI`  = NA, 
             `PL Urban` = lpob_17_u, 
             `PL Rural` = lpob_17_r,
