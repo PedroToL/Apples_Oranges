@@ -4,7 +4,7 @@ library(dineq)
 
 # Data ----
 target = read_csv("./Data/ENIGH18.csv")
-y_hat  = read_csv("./Data/Forward/OLS_test.csv")
+y_hat  = read_csv("./Data/Forward/XGB_test.csv")
 
 target <- target %>% left_join(y_hat, by = "folio")
 target$y_hat <- target$`0`
@@ -15,6 +15,7 @@ target <- target %>% group_by(ent) %>%
 )
 
 ratios <- read_csv("./Data/Forward/ratios.csv")
+ratios$ent <- as.double(ratios$ent)
 target <- target %>% full_join(ratios)
 
 gini.wtd(target$ingc_pc) # 0.463
@@ -27,9 +28,9 @@ target <- target %>% mutate(
   y_hat_0 = ifelse(rururb == 1, exp(y_hat)*lpob_18_r, exp(y_hat)*lpob_18_u)
 )
 target$SE_0 <- (target$ingc_pc - target$y_hat_0)^2 
-sqrt(mean(target$SE_0, na.rm = T)) # 19,985.15
+sqrt(mean(target$SE_0, na.rm = T)) # 19,452
 
-gini.wtd(target$y_hat_0) # 0.33
+gini.wtd(target$y_hat_0) # 0.35
 
 # Between Cluster ----
 target <- target %>% mutate(
@@ -38,9 +39,9 @@ target <- target %>% mutate(
 )
 
 target$SE_BC <- (target$ingc_pc - target$y_hat_BC)^2
-sqrt(mean(target$SE_BC, na.rm = T)) # 19,633.82
+sqrt(mean(target$SE_BC, na.rm = T)) # 19,149
 
-gini.wtd(target$y_hat_BC) # 0.34
+gini.wtd(target$y_hat_BC) # 0.36
 
 # Within Cluster ----
 target <- target %>% mutate(
@@ -49,7 +50,7 @@ target <- target %>% mutate(
 )
 
 target$SE_WC <- (target$ingc_pc - target$y_hat_WC)^2
-sqrt(mean(target$SE_WC, na.rm = T)) # 30,582.67
+sqrt(mean(target$SE_WC, na.rm = T)) # 29,807
  
 gini.wtd(target$y_hat_WC) # 0.55
 
@@ -61,9 +62,9 @@ target <- target %>% mutate(
 )
 
 target$SE_BC_WC <- (target$ingc_pc - target$y_hat_BC_WC)^2
-sqrt(mean(target$SE_BC_WC, na.rm = T)) # 23.891.14
+sqrt(mean(target$SE_BC_WC, na.rm = T)) # 23.161
 
-gini.wtd(target$y_hat_BC_WC) # 0.472
+gini.wtd(target$y_hat_BC_WC) # 0.468
 
 # Errors ----
 target$y_hat_1 <- log(exp(target$y_hat)*target$ratio)
@@ -91,7 +92,7 @@ ggplot(target) + aes(error) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Target_Original.png",
+    filename = "./Figures/Results/Forward/Error_Target_Original_XGB.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -117,7 +118,7 @@ ggplot(target) + aes(error1) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Correction_Test.png",
+    filename = "./Figures/Results/Forward/Error_Correction_Test_XGB.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -146,7 +147,7 @@ ggplot(target) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Densities_Target.png",
+    filename = "./Figures/Results/Forward/Densities_Target_XGB.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -173,7 +174,7 @@ ggplot(target) + aes(y = y) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Correlation_Test.png",
+    filename = "./Figures/Results/Forward/Correlation_Test_XGB.png",
     width = 3000,
     height = 1500,
     units = "px"

@@ -67,7 +67,7 @@ test = enigh16 %>% select(
   folio
 ) 
 
-write.csv(train, "./Data/Backward/train.csv", row.names = FALSE)
+write.csv(test, "./Data/Backward/test.csv", row.names = FALSE)
 
 train = enigh18 %>% select(
   y,
@@ -88,7 +88,7 @@ train = enigh18 %>% select(
   folio
 )
 
-write.csv(test, "./Data/Backward/test.csv", row.names = FALSE)
+write.csv(train, "./Data/Backward/train.csv", row.names = FALSE)
 
 emovi <- emovi17 %>% select(
   starts_with("ginc"),

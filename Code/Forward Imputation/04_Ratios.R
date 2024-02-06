@@ -26,7 +26,7 @@ ggplot(source) + aes(x = error) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Original_Train.png",
+    filename = "./Figures/Results/Forward/Error_Original_Train_OLS.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -131,14 +131,16 @@ for(i in seq(0.01, 1, 0.01)) {
 
 Z = (MSE + diff)/2
 
-alpha = round(((alpha[which.min(MSE)] + alpha[which.min(diff)]) / 2) + sd(alpha), 2)
+alpha = (alpha[which.min(MSE)] + alpha[which.min(diff)]) / 2 + sd(alpha) #0.43
+
+alpha = 0.47
 
 ratio  <- ratio_WC %>% left_join(ratio_BC) %>%
   mutate(
     ratio = alpha*ratio_BC + (1-alpha)*ratio_WC
   )
 
-write.csv(ratio, "./Data/Forward/ratios.csv", row.names = FALSE)
+write.csv(ratio, "./Data/Forward/ratios_OLS.csv", row.names = FALSE)
 
 # Corrections ----
 source <- source %>% full_join(ratio) 
@@ -161,7 +163,7 @@ ggplot(source) + aes(x = error1) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Correction_Train.png",
+    filename = "./Figures/Results/Forward/Error_Correction_Train_OLS.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -188,7 +190,7 @@ ggplot(source) + aes(y = y) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Correlation.png",
+    filename = "./Figures/Results/Forward/Correlation_OLS.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -202,8 +204,8 @@ source <- source %>% mutate(
   )
 
 ggplot(source) + 
-    geom_density(aes(x = log(ingc_pc), fill= "Original"), alpha = 0.5) +
-    geom_density(aes(x = log(y_hat), fill = "Prediction"), alpha = 0.5) +
+    geom_density(aes(x = log(ingc_pc), fill = "Original"),   alpha = 0.5) +
+    geom_density(aes(x = log(y_hat),   fill = "Prediction"), alpha = 0.5) +
     geom_density(aes(x = log(y_hat_1), fill = "Correction"), alpha = 0.5) +
     labs(fill = "") +
     xlab("log HHI") +
@@ -217,7 +219,7 @@ ggplot(source) +
     )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Densities.png",
+    filename = "./Figures/Results/Forward/Densities_OLS.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -238,7 +240,7 @@ ggplot(source) + aes(ratio_BC) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/BC_ratios.png",
+    filename = "./Figures/Results/Forward/BC_ratios_OLS.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -258,7 +260,7 @@ ggplot(source) + aes(ratio_WC) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/WC_ratios.png",
+    filename = "./Figures/Results/Forward/WC_ratios_OLS.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -278,7 +280,7 @@ ggplot(source) + aes(ratio) +
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/BCWC_ratios.png",
+    filename = "./Figures/Results/Forward/BCWC_ratios_OLS.png",
     width = 3000,
     height = 1500,
     units = "px"
