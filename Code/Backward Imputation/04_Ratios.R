@@ -25,6 +25,10 @@ ggplot(source) + aes(x = error) +
   theme(
     axis.line.y = element_blank(),
     plot.background = element_blank()
+  ) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -160,6 +164,10 @@ ggplot(source) + aes(x = error1) +
   theme(
     axis.line.y = element_blank(),
     plot.background = element_blank()
+  ) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -167,7 +175,7 @@ ggsave(
     width = 3000,
     height = 1500,
     units = "px"
-)
+) 
 
 ggplot(source) + aes(y = y) + 
   geom_point( aes(x = y_hat, color = "Original"),
@@ -187,6 +195,10 @@ ggplot(source) + aes(y = y) +
     plot.background = element_blank(),
     legend.background = element_blank(), 
     legend.position = "top"
+  ) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -216,7 +228,11 @@ ggplot(source) +
         plot.background = element_blank(),
         legend.background = element_blank(), 
         legend.position = "top"
-    )
+    ) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
+  )
 
 ggsave(
     filename = "./Figures/Results/Backward/Densities.png",
@@ -237,6 +253,10 @@ ggplot(source) + aes(ratio_BC) +
   theme(
     axis.line.y     = element_blank(),
     plot.background = element_blank()
+  ) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -257,6 +277,10 @@ ggplot(source) + aes(ratio_WC) +
   theme(
     axis.line.y     = element_blank(),
     plot.background = element_blank()
+  ) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -277,6 +301,10 @@ ggplot(source) + aes(ratio) +
   theme(
     axis.line.y     = element_blank(),
     plot.background = element_blank()
+  ) +
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(

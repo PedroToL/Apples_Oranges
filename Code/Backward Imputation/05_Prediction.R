@@ -90,7 +90,9 @@ ggplot(target) + aes(error) +
   ggthemes::theme_clean() +
   theme(
     axis.line.y     = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -116,7 +118,9 @@ ggplot(target) + aes(error1) +
   ggthemes::theme_clean() +
   theme(
     axis.line.y     = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -145,7 +149,9 @@ ggplot(target) +
     axis.line.x     = element_blank(),
     plot.background = element_blank(),
     legend.background = element_blank(),
-    legend.position = "top"
+    legend.position = "top",
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(
@@ -172,7 +178,9 @@ ggplot(target) + aes(y = y) +
     axis.line.y = element_blank(),
     plot.background = element_blank(),
     legend.background = element_blank(), 
-    legend.position = "top"
+    legend.position = "top",
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 15)
   )
 
 ggsave(

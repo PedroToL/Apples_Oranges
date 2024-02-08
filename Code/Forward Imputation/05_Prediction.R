@@ -4,7 +4,7 @@ library(dineq)
 
 # Data ----
 target = read_csv("./Data/ENIGH18.csv")
-y_hat  = read_csv("./Data/Forward/XGB_test.csv")
+y_hat  = read_csv("./Data/Forward/OLS_test.csv")
 
 target <- target %>% left_join(y_hat, by = "folio")
 target$y_hat <- target$`0`
@@ -88,11 +88,15 @@ ggplot(target) + aes(error) +
   ggthemes::theme_clean() +
   theme(
     axis.line.y     = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
+    legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Target_Original_XGB.png",
+    filename = "./Figures/Results/Forward/Error_Target_Original.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -111,14 +115,17 @@ ggplot(target) + aes(error1) +
   geom_density() +
   xlab("") +
   ylab("Density") +
-  ggthemes::theme_clean() +
   theme(
     axis.line.y     = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
+    legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Correction_Test_XGB.png",
+    filename = "./Figures/Results/Forward/Error_Correction_Test.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -142,12 +149,14 @@ ggplot(target) +
     axis.line.y     = element_blank(),
     axis.line.x     = element_blank(),
     plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
     legend.background = element_blank(),
     legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Densities_Target_XGB.png",
+    filename = "./Figures/Results/Forward/Densities_Target.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -167,14 +176,16 @@ ggplot(target) + aes(y = y) +
   labs(color = "") +
   ggthemes::theme_clean() +
   theme(
-    axis.line.y = element_blank(),
+    axis.line.y     = element_blank(),
     plot.background = element_blank(),
-    legend.background = element_blank(), 
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
     legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Correlation_Test_XGB.png",
+    filename = "./Figures/Results/Forward/Correlation_Test.png",
     width = 3000,
     height = 1500,
     units = "px"

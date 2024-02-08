@@ -21,12 +21,14 @@ ggplot(source) + aes(x = error) +
   ylab("Density") +
   ggthemes::theme_clean() +
   theme(
-    axis.line.y = element_blank(),
-    plot.background = element_blank()
+    axis.line.y     = element_blank(),
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18)
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Original_Train_OLS.png",
+    filename = "./Figures/Results/Forward/Error_Original_Train.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -133,14 +135,13 @@ Z = (MSE + diff)/2
 
 alpha = (alpha[which.min(MSE)] + alpha[which.min(diff)]) / 2 + sd(alpha) #0.43
 
-alpha = 0.47
-
 ratio  <- ratio_WC %>% left_join(ratio_BC) %>%
   mutate(
-    ratio = alpha*ratio_BC + (1-alpha)*ratio_WC
+    ratio = alpha*ratio_BC + (1-alpha)*ratio_WC,
+    alpha
   )
 
-write.csv(ratio, "./Data/Forward/ratios_OLS.csv", row.names = FALSE)
+write.csv(ratio, "./Data/Forward/ratios.csv", row.names = FALSE)
 
 # Corrections ----
 source <- source %>% full_join(ratio) 
@@ -158,12 +159,14 @@ ggplot(source) + aes(x = error1) +
   ylab("Density") +
   ggthemes::theme_clean() +
   theme(
-    axis.line.y = element_blank(),
-    plot.background = element_blank()
+    axis.line.y     = element_blank(),
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18)
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Error_Correction_Train_OLS.png",
+    filename = "./Figures/Results/Forward/Error_Correction_Train.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -183,14 +186,16 @@ ggplot(source) + aes(y = y) +
   labs(color = "") +
   ggthemes::theme_clean() +
   theme(
-    axis.line.y = element_blank(),
+    axis.line.y     = element_blank(),
     plot.background = element_blank(),
-    legend.background = element_blank(), 
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
     legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Correlation_OLS.png",
+    filename = "./Figures/Results/Forward/Correlation.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -212,14 +217,16 @@ ggplot(source) +
     ylab("Density") + 
     ggthemes::theme_clean() +
     theme(
-        axis.line.y = element_blank(),
-        plot.background = element_blank(),
-        legend.background = element_blank(), 
-        legend.position = "top"
-    )
+    axis.line.y     = element_blank(),
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
+    legend.position = "top"
+  )
 
 ggsave(
-    filename = "./Figures/Results/Forward/Densities_OLS.png",
+    filename = "./Figures/Results/Forward/Densities.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -236,11 +243,15 @@ ggplot(source) + aes(ratio_BC) +
   ggthemes::theme_clean() +
   theme(
     axis.line.y     = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
+    legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/BC_ratios_OLS.png",
+    filename = "./Figures/Results/Forward/BC_ratios.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -256,11 +267,15 @@ ggplot(source) + aes(ratio_WC) +
   ggthemes::theme_clean() +
   theme(
     axis.line.y     = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
+    legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/WC_ratios_OLS.png",
+    filename = "./Figures/Results/Forward/WC_ratios.png",
     width = 3000,
     height = 1500,
     units = "px"
@@ -276,11 +291,15 @@ ggplot(source) + aes(ratio) +
   ggthemes::theme_clean() +
   theme(
     axis.line.y     = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18), 
+    legend.background = element_blank(),
+    legend.position = "top"
   )
 
 ggsave(
-    filename = "./Figures/Results/Forward/BCWC_ratios_OLS.png",
+    filename = "./Figures/Results/Forward/BCWC_ratios.png",
     width = 3000,
     height = 1500,
     units = "px"

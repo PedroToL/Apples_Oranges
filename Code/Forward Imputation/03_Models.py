@@ -97,3 +97,41 @@ pd.DataFrame(y_XGB, test_set['folio']).to_csv("./Data/Forward/XGB_test.csv")
 
 y_XGB = XGB.predict(emovi_X)
 pd.DataFrame(y_XGB).to_csv("./Data/Forward/XGB_emovi.csv")
+
+# KNN ----
+from sklearn.neighbors import KNeighborsRegressor
+
+params = {
+    'n_neighbors': [1, 5, 10, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100],
+    'weights': ["uniform", "distance"],
+    'metric': ["manhattan"]
+}
+
+KNN = KNeighborsRegressor()
+KNN = RandomizedSearchCV(KNN,
+                         param_distributions = params,
+                         scoring = 'r2',
+                         cv = 5, 
+                         verbose = 1,
+                         random_state = 123,
+                         n_iter = 500)
+                           
+KNN = KNN.fit(X_train, y_train)
+
+print(f"Best params: {KNN.best_params_}")
+print(f"R2: {(KNN.best_score_)}")
+
+KNN = KNN.best_estimator_
+
+y_KNN = KNN.predict(X_vali)
+R2_KNN = r2_score(y_vali, y_KNN)
+print(f"R2 Validation Set: {R2_KNN}")
+
+y_KNN = KNN.predict(train_X)
+pd.DataFrame(y_KNN, train_set['folio']).to_csv("./Data/Forward/KNN_train.csv")
+
+y_KNN = KNN.predict(test_X)
+pd.DataFrame(y_KNN, test_set['folio']).to_csv("./Data/Forward/KNN_test.csv")
+
+y_KNN = KNN.predict(emovi_X)
+pd.DataFrame(y_KNN).to_csv("./Data/Forward/KNN_emovi.csv")
