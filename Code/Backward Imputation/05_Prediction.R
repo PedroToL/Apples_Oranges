@@ -12,8 +12,7 @@ target$y_hat <- target$`0`
 target <- target %>% group_by(ent) %>%
   mutate(
     rank = ntile(y_hat, 100)
-) %>% ungroup() %>%
-  filter(y_hat < 1000)
+) %>% ungroup() 
 
 target$ent <- as.double(target$ent)
 
@@ -30,9 +29,9 @@ target <- target %>% mutate(
   y_hat_0 = ifelse(rururb == 1, exp(y_hat)*lpob_16_r, exp(y_hat)*lpob_16_u)
 )
 target$SE_0 <- (target$ingc_pc - target$y_hat_0)^2 
-sqrt(mean(target$SE_0, na.rm = T)) # 21,250
+sqrt(mean(target$SE_0, na.rm = T)) # 21,221
 
-gini.wtd(target$y_hat_0) # 0.337
+gini.wtd(target$y_hat_0) # 0.339
 
 # Between Cluster ----
 target <- target %>% mutate(
@@ -41,9 +40,9 @@ target <- target %>% mutate(
 )
 
 target$SE_BC <- (target$ingc_pc - target$y_hat_BC)^2
-sqrt(mean(target$SE_BC, na.rm = T)) # 20,935
+sqrt(mean(target$SE_BC, na.rm = T)) # 20,929
 
-gini.wtd(target$y_hat_BC) # 0.341
+gini.wtd(target$y_hat_BC) # 0.342
 
 # Within Cluster ----
 target <- target %>% mutate(
@@ -52,9 +51,9 @@ target <- target %>% mutate(
 )
 
 target$SE_WC <- (target$ingc_pc - target$y_hat_WC)^2
-sqrt(mean(target$SE_WC, na.rm = T)) # 28,773
+sqrt(mean(target$SE_WC, na.rm = T)) # 29,172
  
-gini.wtd(target$y_hat_WC) # 0.551
+gini.wtd(target$y_hat_WC) # 0.553
 
 # Mean ----
 target <- target %>% mutate(
@@ -64,9 +63,9 @@ target <- target %>% mutate(
 )
 
 target$SE_BC_WC <- (target$ingc_pc - target$y_hat_BC_WC)^2
-sqrt(mean(target$SE_BC_WC, na.rm = T)) # 23.608
+sqrt(mean(target$SE_BC_WC, na.rm = T)) # 23.786
 
-gini.wtd(target$y_hat_BC_WC) # 0.467
+gini.wtd(target$y_hat_BC_WC) # 0.469
 
 # Errors ----
 target$y_hat_1 <- log(exp(target$y_hat)*target$ratio)

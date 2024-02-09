@@ -10,7 +10,7 @@ source       <- source %>% left_join(y_hat, by = "folio")
 source$y_hat <- source$`0`
 source$error <- source$y - source$y_hat
 
-MLmetrics::R2_Score(source$y_hat, source$y)
+MLmetrics::R2_Score(source$y_hat, source$y) # 0.503
 
 # Error Distribution
 ggplot(source) + aes(x = error) + 
@@ -133,7 +133,7 @@ for(i in seq(0.01, 1, 0.01)) {
 
 Z = (MSE + diff)/2
 
-alpha = (alpha[which.min(MSE)] + alpha[which.min(diff)]) / 2 + sd(alpha) #0.43
+alpha = (alpha[which.min(MSE)] + alpha[which.min(diff)]) / 2 + sd(alpha) #0.415
 
 ratio  <- ratio_WC %>% left_join(ratio_BC) %>%
   mutate(
@@ -201,7 +201,7 @@ ggsave(
     units = "px"
 )
 
-MLmetrics::R2_Score(source$y_hat_1, source$y)
+MLmetrics::R2_Score(source$y_hat_1, source$y) # 0.71
 
 source <- source %>% mutate(
     y_hat_1 = ifelse(rururb == 1, exp(y_hat_1)*lpob_16_r, exp(y_hat_1)*lpob_16_u),

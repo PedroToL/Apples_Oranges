@@ -86,7 +86,7 @@ train = enigh18 %>% select(
   starts_with("ent_"),
   starts_with("region_"),
   folio
-)
+) %>% filter(!(folio %in% c("15032065011------", "29002236021------", "08601872211------", "12614305031------")))
 
 write.csv(train, "./Data/Backward/train.csv", row.names = FALSE)
 

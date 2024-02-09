@@ -29,7 +29,9 @@ enigh18 %>% select(lincome, ing_cor, ingc_pc) %>%
     axis.line.y       = element_blank(),
     legend.position   = "top",
     legend.background = element_blank(),
-    plot.background   = element_blank()
+    plot.background   = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18)
   )
 
 ggsave(
@@ -45,9 +47,6 @@ lpob_18_u = 1521.44  # Linea de pobreza Urbana Julio 2018
 
 lpob_16_r = 1015.44  # Linea de pobreza Rural Julio 2016
 lpob_16_u = 1348.81  # Linea de pobreza Urbana Julio 2016
-
-lpob_17_r = 1120.08  # Linea de pobreza Rural Julio 2017
-lpob_17_u = 1471.60  # Linea de pobreza Urbana Julio 2017
 
 enigh18 = enigh18 %>% mutate(
   r_ingc_pc = ifelse(rururb == 1, ingc_pc/lpob_18_r, ingc_pc/lpob_18_u),
@@ -79,7 +78,9 @@ enigh18 %>% select(y) %>%
     axis.line.y = element_blank(),
     legend.position = "top",
     legend.background = element_blank(),
-    plot.background = element_blank()
+    plot.background = element_blank(),
+    axis.text = element_text(size = 15), 
+    axis.title = element_text(size = 18)
   )
 
 ggsave(

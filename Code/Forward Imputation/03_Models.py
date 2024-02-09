@@ -10,7 +10,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 # Data ----
 train_set = pd.read_csv("./Data/Forward/train.csv")
 test_set  = pd.read_csv("./Data/Forward/test.csv")
-emovi     = pd.read_csv("./Data/Forward/emovi_replica.csv")
+emovi     = pd.read_csv("./Data/Forward/emovi.csv")
+
 
 # Train-Validation Split ----
 train_y = train_set[["y"]]
@@ -19,9 +20,14 @@ train_X = train_set.iloc[:, 7:-1]
 test_y = test_set[["y"]]
 test_X = test_set.iloc[:, 7:-1]
 
-emovi_X = emovi.iloc[:, 8:-3]
+emovi_X = emovi.iloc[:, 6:-1]
+emovi_X.fillna(0, inplace=True)
 
-X_train, X_vali, y_train, y_vali = train_test_split(train_X, train_y, train_size=0.2, random_state=1)
+names = train_X.columns.tolist()
+test_X.columns = names
+emovi_X.columns = names
+
+X_train, X_vali, y_train, y_vali = train_test_split(train_X, train_y, train_size=0.8, random_state=1)
 
 # OLS ----
 from sklearn.linear_model import LinearRegression

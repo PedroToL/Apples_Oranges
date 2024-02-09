@@ -18,7 +18,7 @@ ratios <- read_csv("./Data/Forward/ratios.csv")
 ratios$ent <- as.double(ratios$ent)
 target <- target %>% full_join(ratios)
 
-gini.wtd(target$ingc_pc) # 0.463
+gini.wtd(target$ingc_pc) # 0.464
 
 lpob_18_r = 1145.5   # Linea de pobreza Rural Julio 2018
 lpob_18_u = 1521.44  # Linea de pobreza Urbana Julio 2018
@@ -28,9 +28,9 @@ target <- target %>% mutate(
   y_hat_0 = ifelse(rururb == 1, exp(y_hat)*lpob_18_r, exp(y_hat)*lpob_18_u)
 )
 target$SE_0 <- (target$ingc_pc - target$y_hat_0)^2 
-sqrt(mean(target$SE_0, na.rm = T)) # 19,452
+sqrt(mean(target$SE_0, na.rm = T)) # 19,945
 
-gini.wtd(target$y_hat_0) # 0.35
+gini.wtd(target$y_hat_0) # 0.342
 
 # Between Cluster ----
 target <- target %>% mutate(
@@ -39,9 +39,9 @@ target <- target %>% mutate(
 )
 
 target$SE_BC <- (target$ingc_pc - target$y_hat_BC)^2
-sqrt(mean(target$SE_BC, na.rm = T)) # 19,149
+sqrt(mean(target$SE_BC, na.rm = T)) # 19,624
 
-gini.wtd(target$y_hat_BC) # 0.36
+gini.wtd(target$y_hat_BC) # 0.344
 
 # Within Cluster ----
 target <- target %>% mutate(
@@ -50,9 +50,9 @@ target <- target %>% mutate(
 )
 
 target$SE_WC <- (target$ingc_pc - target$y_hat_WC)^2
-sqrt(mean(target$SE_WC, na.rm = T)) # 29,807
+sqrt(mean(target$SE_WC, na.rm = T)) # 30,736
  
-gini.wtd(target$y_hat_WC) # 0.55
+gini.wtd(target$y_hat_WC) # 0.556
 
 # Mean ----
 target <- target %>% mutate(
@@ -62,9 +62,9 @@ target <- target %>% mutate(
 )
 
 target$SE_BC_WC <- (target$ingc_pc - target$y_hat_BC_WC)^2
-sqrt(mean(target$SE_BC_WC, na.rm = T)) # 23.161
+sqrt(mean(target$SE_BC_WC, na.rm = T)) # 23.923
 
-gini.wtd(target$y_hat_BC_WC) # 0.468
+gini.wtd(target$y_hat_BC_WC) # 0.472
 
 # Errors ----
 target$y_hat_1 <- log(exp(target$y_hat)*target$ratio)

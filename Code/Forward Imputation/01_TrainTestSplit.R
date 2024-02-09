@@ -39,7 +39,7 @@ write.csv(enigh18, "./Data/ENIGH18.csv", row.names = FALSE)
 enigh16 = enigh16 %>% mutate(
   r_ingc_pc = ifelse(rururb == 1, ingc_pc/lpob_16_r, ingc_pc/lpob_16_u),
   y         = log(r_ingc_pc)
-) %>% select(-`...1`)
+)
 
 write.csv(enigh16, "./Data/ENIGH16.csv", row.names = FALSE)
 
@@ -109,6 +109,7 @@ emovi <- emovi17 %>% select(
   postgrado,
   starts_with("ent_"),
   starts_with("region_"),
-  folio)
+  folio, 
+  -inst_NA)
 
 write.csv(emovi, "./Data/Forward/emovi.csv", row.names = FALSE)

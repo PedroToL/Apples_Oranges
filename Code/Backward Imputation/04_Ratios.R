@@ -4,7 +4,7 @@ library(dineq)
 
 # Data ----
 source = read_csv("./Data/ENIGH18.csv")
-y_hat  = read_csv("./Data/Backward/OLS_train.csv")
+y_hat  = read_csv("./Data/Backward/OLS_train.csv") 
 
 source       <- source %>% full_join(y_hat, by = "folio")
 source$y_hat <- source$`0`
@@ -12,7 +12,7 @@ source$error <- source$y - source$y_hat
 
 source <- source %>% filter(y_hat < 1000)
 
-MLmetrics::R2_Score(source$y_hat, source$y) # 0.49
+MLmetrics::R2_Score(source$y_hat, source$y) # 0.496
 
 # Error Distribution
 ggplot(source) + aes(x = error) + 
@@ -208,7 +208,7 @@ ggsave(
     units = "px"
 )
 
-MLmetrics::R2_Score(source$y_hat_1, source$y)
+MLmetrics::R2_Score(source$y_hat_1, source$y) # 0.71
 
 source <- source %>% mutate(
     y_hat_1 = ifelse(rururb == 1, exp(y_hat_1)*lpob_18_r, exp(y_hat_1)*lpob_18_u),

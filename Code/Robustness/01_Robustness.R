@@ -33,7 +33,7 @@ set.seed(123)
 for (i in 1:9) {
     print(i)
     for (j in 1:100){
-        r = sample(c(1,2,3,4), 1, prob = c(0.7, 0.1, 0.1, 0.1))
+        r = sample(c(1,2,3,4), 1, prob = c(0.25, 0.25, 0.25, 0.25))
 
         if (r == 1) {
            target$weights = rep(1, nrow(target))
@@ -90,7 +90,7 @@ set.seed(123)
 for (i in 1:9) {
     print(i)
     for (j in 1:100){
-        r = sample(c(1,2,3,4), 1, prob = c(0.7, 0.1, 0.1, 0.1))
+        r = sample(c(1,2,3,4), 1, prob = c(0.25, 0.25, 0.25, 0.25))
 
         if (r == 1) {
            target$weights = rep(1, nrow(target))
