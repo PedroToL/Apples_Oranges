@@ -113,3 +113,4 @@ emovi <- emovi17 %>% select(
   -inst_NA)
 
 write.csv(emovi, "./Data/Forward/emovi.csv", row.names = FALSE)
+
