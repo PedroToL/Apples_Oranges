@@ -114,3 +114,65 @@ emovi <- emovi17 %>% select(
 
 write.csv(emovi, "./Data/Forward/emovi.csv", row.names = FALSE)
 
+mean_train <- train %>% mutate(I = 1) %>%
+  group_by(I) %>%
+  summarise_all(list(Mean = mean)) %>%
+  t() %>% data.frame() %>%
+  transmute(
+    Mean = ./1
+  )
+
+sd_train <- train %>% mutate(I = 1) %>%
+  group_by(I) %>%
+  summarise_all(list(SD = sd)) %>%
+  t() %>% data.frame() %>%
+  transmute(
+    SD = ./1
+  )
+
+cbind(mean_train, sd_train) %>% 
+  transmute(
+    Mean = paste0(round(Mean, 2) , " (", round(SD,2), ")")
+  ) %>% write.csv("./Results/enigh16.csv")
+
+mean_test <- test %>% mutate(I = 1) %>%
+  group_by(I) %>%
+  summarise_all(list(Mean = mean)) %>%
+  t() %>% data.frame() %>%
+  transmute(
+    Mean = ./1
+  )
+
+sd_test <- test %>% mutate(I = 1) %>%
+  group_by(I) %>%
+  summarise_all(list(SD = sd)) %>%
+  t() %>% data.frame() %>%
+  transmute(
+    SD = ./1
+  )
+
+cbind(mean_test, sd_test) %>% 
+  transmute(
+    Mean = paste0(round(Mean, 2) , " (", round(SD,2), ")")
+  ) %>% write.csv("./Results/enigh18.csv")
+
+mean_emovi <- emovi %>% mutate(I = 1) %>%
+  group_by(I) %>%
+  summarise_all(funs(mean(., na.rm=T))) %>%
+  t() %>% data.frame() %>%
+  transmute(
+    Mean = ./1
+  )
+
+sd_emovi <- emovi %>% mutate(I = 1) %>%
+  group_by(I) %>%
+  summarise_all(funs(sd(., na.rm=T))) %>%
+  t() %>% data.frame() %>%
+  transmute(
+    SD = ./1
+  )
+
+cbind(mean_emovi, sd_emovi) %>% 
+  transmute(
+    Mean = paste0(round(Mean, 2) , " (", round(SD,2), ")")
+  ) %>% write.csv("./Results/emovi.csv")
