@@ -27,7 +27,7 @@ names = train_X.columns.tolist()
 test_X.columns = names
 emovi_X.columns = names
 
-X_train, X_vali, y_train, y_vali = train_test_split(train_X, train_y, train_size=0.8, random_state=1)
+X_train, X_vali, y_train, y_vali = train_test_split(train_X, train_y, train_size=0.2, random_state=1)
 
 # OLS ----
 from sklearn.linear_model import LinearRegression
@@ -54,14 +54,14 @@ y_OLS = OLS.predict(X_vali)
 R2_OLS = r2_score(y_vali, y_OLS)
 print(f"R2 Validation Set: {R2_OLS}")
 
-y_OLS = OLS.predict(train_X)
-pd.DataFrame(y_OLS, train_set['folio']).to_csv("./Data/Forward/OLS_train.csv")
+#y_OLS = OLS.predict(train_X)
+#pd.DataFrame(y_OLS, train_set['folio']).to_csv("./Data/Forward/OLS_train.csv")
 
-y_OLS = OLS.predict(test_X)
-pd.DataFrame(y_OLS, test_set['folio']).to_csv("./Data/Forward/OLS_test.csv")
+#y_OLS = OLS.predict(test_X)
+#pd.DataFrame(y_OLS, test_set['folio']).to_csv("./Data/Forward/OLS_test.csv")
 
-y_OLS = OLS.predict(emovi_X)
-pd.DataFrame(y_OLS).to_csv("./Data/Forward/OLS_emovi.csv")
+#y_OLS = OLS.predict(emovi_X)
+#pd.DataFrame(y_OLS).to_csv("./Data/Forward/OLS_emovi.csv")
 
 # XGBoost ----
 from xgboost import XGBRegressor

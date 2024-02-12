@@ -33,7 +33,7 @@ set.seed(123)
 for (i in 1:9) {
     print(i)
     for (j in 1:100){
-        r = sample(c(1,2,3,4), 1, prob = c(0.25, 0.25, 0.25, 0.25))
+        r = sample(c(1,2,3,4), 1, prob = c(0.45, 0.15, 0.15, 0.15))
 
         if (r == 1) {
            target$weights = rep(1, nrow(target))
@@ -69,10 +69,7 @@ results_FWD <- data.frame(results) %>% pivot_longer(cols = -X1,
 target = read_csv("./Data/ENIGH16.csv")
 y_hat  = read_csv("./Data/Backward/OLS_test.csv")
 
-target <- target %>% left_join(y_hat, by = "folio")
-target$y_hat <- target$`0`
-target <- target %>%
-  filter(y_hat < 1000)
+target$y_hat <- y_hat$`0`
 
 ratios <- read_csv("./Data/Backward/ratios.csv")
 ratios$ent <- as.double(ratios$ent)
@@ -86,11 +83,12 @@ results[, 1] <- 1:10
 per <- "BWD"
 left <- quantile(target$y)[2]
 right <- quantile(target$y)[4]
+
 set.seed(123)
 for (i in 1:9) {
     print(i)
     for (j in 1:100){
-        r = sample(c(1,2,3,4), 1, prob = c(0.25, 0.25, 0.25, 0.25))
+        r = sample(c(1,2,3,4), 1, prob = c(0.45, 0.15, 0.15, 0.15))
 
         if (r == 1) {
            target$weights = rep(1, nrow(target))

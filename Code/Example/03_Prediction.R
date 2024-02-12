@@ -42,8 +42,9 @@ target <- target %>% mutate(
 gini.wtd(target$y_hat_BC_WC) # 0.482
 
 # Distribution ----
-ggplot(target) + aes(x = log(y_hat_BC_WC)) + 
-    geom_density(aes(fill = "A"), alpha = 0.75) +
+ggplot(target) + aes(x = log(y)) + 
+    geom_density(aes(fill = "Original"), alpha = 0.75) +
+    geom_density(aes(x = log(y_hat_BC_WC), fill = "Corrected"), alpha = 0.75, adjust = 1.5) +
     xlab("log HHI") +
     ylab("Density") +
     labs(fill = "") + 
@@ -54,7 +55,7 @@ ggplot(target) + aes(x = log(y_hat_BC_WC)) +
     plot.background   = element_blank(),
     axis.text = element_text(size = 15), 
     axis.title = element_text(size = 18),
-    legend.position = "none"
+    legend.position = "top"
   )
 
 ggsave(
@@ -65,3 +66,5 @@ ggsave(
 )
 
 write.csv(target, "./Data/Example/final.csv")
+
+target %>% select(y_hat_BC_WC, y) %>% summary()
