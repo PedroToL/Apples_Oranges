@@ -58,7 +58,7 @@ ggplot(df) + aes(x = index, y = log(income), color = "A") +
   )
 
 ggsave(
-    filename = "./Figures/Example/Correlation.png",
+    filename = "./Figures/Example/Correlation_I.png",
     width = 3000,
     height = 1500,
     units = "px"
