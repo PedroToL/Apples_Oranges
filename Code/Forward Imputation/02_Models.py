@@ -82,7 +82,7 @@ XGB = RandomizedSearchCV(XGB,
                          cv = 5, 
                          verbose = 1,
                          random_state = 123,
-                         n_iter = 500)
+                         n_iter = 200)
                            
 XGB = XGB.fit(X_train, y_train)
 
@@ -120,7 +120,7 @@ KNN = RandomizedSearchCV(KNN,
                          cv = 5, 
                          verbose = 1,
                          random_state = 123,
-                         n_iter = 500)
+                         n_iter = 200)
                            
 KNN = KNN.fit(X_train, y_train)
 
